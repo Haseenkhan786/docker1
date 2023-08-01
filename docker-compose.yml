@@ -1,0 +1,61 @@
+
+
+version: '3.3'
+
+services:
+
+  frontend:
+
+    build:
+
+      context: ./register-form
+
+    ports:
+
+      - "4200:4200"
+
+    network_mode: "host"
+
+    environment:
+
+      - BACKEND_URL=http://localhost:8080
+
+  backend:
+
+    build:
+
+      context: ./go1/go
+
+    ports:
+
+      - "8080:8080"
+
+    network_mode: "host"
+
+    environment:
+
+      DB_HOST: localhost
+
+      DB_PORT: 5432
+
+      DB_NAME: postgres
+
+      DB_USER: haseen
+
+      DB_PASSWORD: 1302001
+
+  database:
+
+    image: postgres:14
+
+    ports:
+
+      - "5432:5432"
+
+    environment:
+
+      POSTGRES_DB: postgres
+
+      POSTGRES_USER: haseen
+
+      POSTGRES_PASSWORD: 1302001
